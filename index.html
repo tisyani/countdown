@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>BOGY JON HAZAAAAAA:3333</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #000;
+      color: #fff;
+      font-family: Arial, sans-serif;
+    }
+
+    #countdown {
+      font-size: 10vw;
+      text-align: center;
+    }
+  </style>
+</head> 
+<body>
+  <div id="countdown">Loading...</div>
+
+  <script>
+    function getNextSaturdayNoon() {
+      const now = new Date();
+      const result = new Date(now);
+
+      const day = now.getDay(); // 0 (Sun) to 6 (Sat)
+      const daysUntilSaturday = (6 - day + 7) % 7 || 7;
+
+      result.setDate(now.getDate() + daysUntilSaturday);
+      result.setHours(12, 0, 0, 0); // 12 PM
+
+      return result;
+    }
+
+    function updateCountdown() {
+      const now = new Date();
+      const target = getNextSaturdayNoon();
+      const diff = target - now;
+
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "00:00:00";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+      const seconds = String(totalSeconds % 60).padStart(2, "0");
+
+      document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  </script>
+</body>
+</html>
