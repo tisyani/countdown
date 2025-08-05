@@ -6,6 +6,11 @@
   <title>BOGY JON HAZAAAAAA:3333</title>
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&display=swap" rel="stylesheet">
   <style>
+    :root {
+      --main-pink: #ff1493;
+      --main-blue: #00bfff;
+    }
+
     body {
       margin: 0;
       padding: 0;
@@ -13,15 +18,15 @@
       overflow: hidden;
       background: linear-gradient(to bottom right, #ffe0f0, #cceeff);
       font-family: 'Press Start 2P', cursive;
-      color: #ff1493;
+      color: var(--main-pink);
       position: relative;
     }
 
     #countdown {
-      font-size: 5vw;
+      font-size: 8vw; /* Responsive font size */
       text-align: center;
       margin-top: 5vh;
-      text-shadow: 2px 2px #00bfff;
+      text-shadow: 2px 2px var(--main-blue);
       z-index: 2;
       position: relative;
     }
@@ -48,8 +53,8 @@
 
     .glitter {
       position: absolute;
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       background: white;
       border-radius: 50%;
       opacity: 0.7;
@@ -64,8 +69,11 @@
 
     .img-floater {
       position: absolute;
-      width: 120px;
+      width: 20vw; /* Responsive image size */
+      max-width: 120px;
+      min-width: 60px;
       animation: floaty 8s ease-in-out infinite;
+      z-index: 1;
     }
 
     .img-floater.unicorn1 { top: 10%; left: 5%; }
@@ -81,19 +89,37 @@
     .sticker {
       position: absolute;
       font-family: 'Pacifico', cursive;
-      font-size: 2rem;
+      font-size: 4vw; /* Responsive */
       color: hotpink;
-      transform: rotate(-10deg);
+      transform: rotate(-5deg);
       animation: pulse 2s infinite ease-in-out;
+      text-align: center;
+      max-width: 80%;
+      word-break: break-word;
     }
 
-    .sticker1 { top: 60%; left: 10%; }
-    .sticker2 { top: 20%; right: 10%; }
-    .sticker3 { bottom: 15%; left: 40%; }
+    .sticker1 { top: 65%; left: 5%; }
+    .sticker2 { top: 10%; right: 5%; }
+    .sticker3 { bottom: 10%; left: 10%; }
 
     @keyframes pulse {
-      0%, 100% { transform: scale(1) rotate(-10deg); }
-      50% { transform: scale(1.1) rotate(-10deg); }
+      0%, 100% { transform: scale(1) rotate(-5deg); }
+      50% { transform: scale(1.1) rotate(-5deg); }
+    }
+
+    /* Mobile-specific tweaks */
+    @media (max-width: 480px) {
+      #countdown {
+        font-size: 10vw;
+      }
+
+      .img-floater {
+        width: 25vw;
+      }
+
+      .sticker {
+        font-size: 5vw;
+      }
     }
   </style>
 </head>
@@ -109,9 +135,9 @@
   <img class="img-floater pegasus" src="pegasus.png" alt="Pegasus" />
 
   <!-- Stickers -->
-  <div class="sticker sticker1">✨✨✨✨✨✨✨✨(random sparkles cause they shine like u)</div>
+  <div class="sticker sticker1">✨✨✨✨✨✨✨✨<br>(random sparkles cause they shine like u)</div>
   <div class="sticker sticker2">💖💓💗</div>
-  <div class="sticker sticker3">(buzizaszlo1)🌈 BOGY <3 YANY 🌈(buzizaszlo2)</div>
+  <div class="sticker sticker3">(buzizaszlo1)<br>🌈 BOGY <3 YANY 🌈<br>(buzizaszlo2)</div>
 
   <!-- Sparkles -->
   <script>
