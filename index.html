@@ -4,39 +4,139 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>BOGY JON HAZAAAAAA:3333</title>
+  <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&display=swap" rel="stylesheet">
   <style>
     body {
       margin: 0;
       padding: 0;
       height: 100vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background-color: #000;
-      color: #fff;
-      font-family: Arial, sans-serif;
+      overflow: hidden;
+      background: linear-gradient(to bottom right, #ffe0f0, #cceeff);
+      font-family: 'Press Start 2P', cursive;
+      color: #ff1493;
+      position: relative;
     }
 
     #countdown {
-      font-size: 10vw;
+      font-size: 5vw;
       text-align: center;
+      margin-top: 5vh;
+      text-shadow: 2px 2px #00bfff;
+      z-index: 2;
+      position: relative;
+    }
+
+    .rainbow-bar {
+      width: 100%;
+      height: 20px;
+      background: repeating-linear-gradient(
+        45deg,
+        red, orange 20px,
+        yellow 40px,
+        green 60px,
+        blue 80px,
+        indigo 100px,
+        violet 120px
+      );
+      animation: scrollRainbow 10s linear infinite;
+    }
+
+    @keyframes scrollRainbow {
+      0% { background-position: 0 0; }
+      100% { background-position: 1000px 0; }
+    }
+
+    .glitter {
+      position: absolute;
+      width: 12px;
+      height: 12px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.7;
+      animation: floatSparkle 6s linear infinite;
+      pointer-events: none;
+    }
+
+    @keyframes floatSparkle {
+      0% { transform: translateY(0) scale(1); opacity: 0.8; }
+      100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
+    }
+
+    .img-floater {
+      position: absolute;
+      width: 120px;
+      animation: floaty 8s ease-in-out infinite;
+    }
+
+    .img-floater.unicorn1 { top: 10%; left: 5%; }
+    .img-floater.unicorn2 { bottom: 10%; right: 5%; animation-delay: 2s; }
+    .img-floater.pegasus { top: 20%; right: 20%; animation-delay: 4s; }
+
+    @keyframes floaty {
+      0% { transform: translateY(0); }
+      50% { transform: translateY(-20px); }
+      100% { transform: translateY(0); }
+    }
+
+    .sticker {
+      position: absolute;
+      font-family: 'Pacifico', cursive;
+      font-size: 2rem;
+      color: hotpink;
+      transform: rotate(-10deg);
+      animation: pulse 2s infinite ease-in-out;
+    }
+
+    .sticker1 { top: 60%; left: 10%; }
+    .sticker2 { top: 20%; right: 10%; }
+    .sticker3 { bottom: 15%; left: 40%; }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1) rotate(-10deg); }
+      50% { transform: scale(1.1) rotate(-10deg); }
     }
   </style>
-</head> 
+</head>
 <body>
+
+  <div class="rainbow-bar"></div>
+
   <div id="countdown">Loading...</div>
 
+  <!-- Unicorns & Pegasus -->
+  <img class="img-floater unicorn1" src="asfasf.jpg" alt="Unicorn" />
+  <img class="img-floater unicorn2" src="image.png" alt="Unicorn 2" />
+  <img class="img-floater pegasus" src="pegasus.png" alt="Pegasus" />
+
+  <!-- Stickers -->
+  <div class="sticker sticker1">✨✨✨✨✨✨✨✨(random sparkles cause they shine like u)</div>
+  <div class="sticker sticker2">💖💓💗</div>
+  <div class="sticker sticker3">(buzizaszlo1)🌈 BOGY <3 YANY 🌈(buzizaszlo2)</div>
+
+  <!-- Sparkles -->
+  <script>
+    function createGlitter() {
+      const sparkle = document.createElement('div');
+      sparkle.classList.add('glitter');
+      sparkle.style.left = Math.random() * 100 + 'vw';
+      sparkle.style.top = Math.random() * 100 + 'vh';
+      sparkle.style.animationDuration = (Math.random() * 3 + 3) + 's';
+      document.body.appendChild(sparkle);
+      setTimeout(() => sparkle.remove(), 6000);
+    }
+
+    setInterval(createGlitter, 150);
+  </script>
+
+  <!-- Countdown Script -->
   <script>
     function getNextSaturdayNoon() {
       const now = new Date();
       const result = new Date(now);
-
       const day = now.getDay(); // 0 (Sun) to 6 (Sat)
       const daysUntilSaturday = (6 - day + 7) % 7 || 7;
-
       result.setDate(now.getDate() + daysUntilSaturday);
       result.setHours(12, 0, 0, 0); // 12 PM
-
       return result;
     }
 
