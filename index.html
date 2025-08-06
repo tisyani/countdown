@@ -24,6 +24,18 @@
       box-sizing: border-box;
     }
 
+    .center-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  text-align: center;
+  padding: 20px;
+  box-sizing: border-box;
+  z-index: 2;
+  position: relative;
+}
+
     .rainbow-bar {
       width: 100%;
       height: 20px;
@@ -45,11 +57,8 @@
     }
 
     #countdown {
-      font-size: 6vw;
       text-align: center;
       margin: 2vh auto;
-      text-shadow: 2px 2px #00bfff;
-      z-index: 2;
       position: relative;
       max-width: 90vw;
       line-height: 1.2;
@@ -131,7 +140,9 @@
 
   <div class="rainbow-bar"></div>
 
-  <div id="countdown">Loading...</div>
+  <div class="center-container">
+    <div id="countdown">Loading...</div>
+  </div>
 
   <!-- Floating images (replace these with working image paths) -->
   <img class="img-floater unicorn1" src="asfasf.jpg" alt="Unicorn" />
