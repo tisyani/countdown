@@ -199,23 +199,22 @@
 }
 
     function updateCountdown() {
-      const now = new Date();
-      const target = getNextSaturdayNoon();
-      const diff = target - now;
+  const now = new Date();
+  const target = getNextFridayNoon();
+  const diff = target - now;
 
-      if (diff <= 0) {
-        document.getElementById("countdown").textContent = "00:00:00";
-        return;
-      }
+  if (diff <= 0) {
+    document.getElementById("countdown").textContent = "00:00:00";
+    return;
+  }
 
-      const totalSeconds = Math.floor(diff / 1000);
-      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-      const seconds = String(totalSeconds % 60).padStart(2, "0");
+  const totalSeconds = Math.floor(diff / 1000);
+  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
+  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
+  const seconds = String(totalSeconds % 60).padStart(2, "0");
 
-      document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
-    }
-
+  document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+}
     updateCountdown();
     setInterval(updateCountdown, 1000);
   </script>
