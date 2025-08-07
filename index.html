@@ -188,15 +188,15 @@
 
   <!-- Countdown Script -->
   <script>
-    function getNextSaturdayNoon() {
-      const now = new Date();
-      const result = new Date(now);
-      const day = now.getDay(); // 0 (Sun) to 6 (Sat)
-      const daysUntilSaturday = (6 - day + 7) % 7 || 7;
-      result.setDate(now.getDate() + daysUntilSaturday);
-      result.setHours(12, 0, 0, 0); // 12 PM
-      return result;
-    }
+    function getNextFridayNoon() {
+  const now = new Date();
+  const result = new Date(now);
+  const day = now.getDay(); // Sunday = 0, Friday = 5
+  const daysUntilFriday = (5 - day + 7) % 7 || 7;
+  result.setDate(now.getDate() + daysUntilFriday);
+  result.setHours(12, 0, 0, 0); // 12 PM
+  return result;
+}
 
     function updateCountdown() {
       const now = new Date();
