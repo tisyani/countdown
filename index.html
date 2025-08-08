@@ -188,16 +188,18 @@
 
   <!-- Countdown Script -->
   <script>
-    function getNextFridayNoon() {
+    function getTodayAt8PM() {
   const now = new Date();
-  const result = new Date(now);
-  const day = now.getDay(); // Sunday = 0, Friday = 5
-  const daysUntilFriday = (5 - day + 7) % 7 || 7;
-  result.setDate(now.getDate() + daysUntilFriday);
-  result.setHours(20, 0, 0, 0); // 12 PM
-  return result;
-}
+  const target = new Date(now);
+  target.setHours(20, 0, 0, 0); // Set to 8:00 PM
 
+  // If it's already past 8 PM today, countdown ends at 00:00:00
+  if (target < now) {
+    return null;
+  }
+
+  return target;
+}
     function updateCountdown() {
   const now = new Date();
   const target = getNextFridayNoon();
