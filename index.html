@@ -1,14 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <link rel="manifest" href="manifest.json">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="BOGY JON">
-<link rel="apple-touch-icon" href="icon.png"> <!-- 180x180 icon -->
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover"/>
   <title>BOGY JON HAZAAAAAA:3333</title>
+  <link rel="manifest" href="manifest.json">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="BOGY JON">
+  <link rel="apple-touch-icon" href="icon.png">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Pacifico&display=swap" rel="stylesheet">
   <style>
     html, body {
@@ -21,34 +21,19 @@
       background: linear-gradient(to bottom right, #ffe0f0, #cceeff);
       overflow: hidden;
       position: relative;
-      box-sizing: border-box;
     }
 
-    .center-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  text-align: center;
-  padding: 20px;
-  box-sizing: border-box;
-  z-index: 2;
-  position: relative;
-}
-
-.center-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: flex-start;
-  height: 100vh;
-  padding: 40px;
-  box-sizing: border-box;
-  z-index: 10;
-  position: relative;
-  text-align: center;
-  pointer-events: none; /* allows sparkles to go behind it if needed */
-  padding-top: 40vh;
-}
+    .center-wrapper {
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+      height: 100vh;
+      padding-top: 40vh;
+      pointer-events: none;
+      z-index: 10;
+      position: relative;
+      text-align: center;
+    }
 
     .rainbow-bar {
       width: 100%;
@@ -70,16 +55,16 @@
       100% { background-position: 1000px 0; }
     }
 
-#countdown {
-  font-size: 8vw;
-  color: #ff1493;
-  text-shadow: 2px 2px #00bfff;
-  z-index: 10;
-  background: rgba(255, 255, 255, 0.2);
-  padding: 10px 20px;
-  border-radius: 20px;
-  backdrop-filter: blur(5px);
-}
+    #countdown {
+      font-size: 8vw;
+      color: #ff1493;
+      text-shadow: 2px 2px #00bfff;
+      z-index: 10;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 10px 20px;
+      border-radius: 20px;
+      backdrop-filter: blur(5px);
+    }
 
     .img-floater {
       position: absolute;
@@ -139,34 +124,26 @@
     }
 
     @media (max-width: 600px) {
-      #countdown {
-        font-size: 7vw;
-      }
-
-      .sticker {
-        font-size: 4.5vw;
-      }
-
-      .img-floater {
-        width: 22vw;
-      }
+      #countdown { font-size: 7vw; }
+      .sticker { font-size: 4.5vw; }
+      .img-floater { width: 22vw; }
     }
   </style>
 </head>
 <body>
 
-<div class="rainbow-bar"></div>
+  <div class="rainbow-bar"></div>
 
-<div class="center-wrapper">
-  <div id="countdown">Loading...</div>
-</div>
+  <div class="center-wrapper">
+    <div id="countdown">Loading...</div>
+  </div>
 
-  <!-- Floating images (replace these with working image paths) -->
+  <!-- Floating images -->
   <img class="img-floater unicorn1" src="asfasf.jpg" alt="Unicorn" />
   <img class="img-floater unicorn2" src="image.png" alt="Unicorn 2" />
   <img class="img-floater pegasus" src="pegasus.png" alt="Pegasus" />
 
-  <!-- Stickers (fully wrapped, no overlap) -->
+  <!-- Stickers -->
   <div class="sticker sticker1">✨✨✨✨✨✨✨✨<br>(random sparkles cause they shine like u)</div>
   <div class="sticker sticker2">💖💓💗</div>
   <div class="sticker sticker3">🌈 BOGY <3 YANY 🌈</div>
@@ -188,37 +165,42 @@
 
   <!-- Countdown Script -->
   <script>
-    function getTodayAt8PM() {
-  const now = new Date();
-  const target = new Date(now);
-  target.setHours(20, 0, 0, 0); // Set to 8:00 PM
+    function getTargetTime() {
+      const now = new Date();
+      const target = new Date();
+      target.setHours(20, 0, 0, 0); // today at 20:00
 
-  // If it's already past 8 PM today, countdown ends at 00:00:00
-  if (target < now) {
-    return null;
-  }
-function updateCountdown() {
-  const now = new Date();
-  const target = getTodayAt8PM();
-  const diff = target - now;
+      if (now >= target) {
+        target.setDate(target.getDate() + 1); // if past 8PM, go to tomorrow 8PM
+      }
 
-  if (diff <= 0) {
-    document.getElementById("countdown").textContent = "00:00:00";
-    return;
-  }
+      return target;
+    }
 
-  const totalSeconds = Math.floor(diff / 1000);
-  const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, "0");
-  const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, "0");
-  const seconds = String(totalSeconds % 60).padStart(2, "0");
+    function updateCountdown() {
+      const now = new Date();
+      const target = getTargetTime();
+      const diff = target - now;
 
-  document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
-}
-  return target;
-}
-    
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "00:00:00";
+        return;
+      }
+
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
+
+      document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+    }
+
+    // Make sure DOM is ready
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
   </script>
+
 </body>
 </html>
