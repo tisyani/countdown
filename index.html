@@ -199,7 +199,7 @@
   }
 function updateCountdown() {
   const now = new Date();
-  const target = getNextFridayNoon();
+  const target = getTodatAt8PM();
   const diff = target - now;
 
   if (diff <= 0) {
