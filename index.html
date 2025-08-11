@@ -23,12 +23,14 @@
       position: relative;
     }
 
+    /* Countdown centered in safe area */
     .center-wrapper {
       display: flex;
       justify-content: center;
-      align-items: flex-start;
-      height: 100vh;
-      padding-top: 40vh;
+      align-items: center;
+      height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+      padding-top: env(safe-area-inset-top);
+      padding-bottom: env(safe-area-inset-bottom);
       pointer-events: none;
       z-index: 10;
       position: relative;
@@ -159,53 +161,52 @@
       document.body.appendChild(sparkle);
       setTimeout(() => sparkle.remove(), 6000);
     }
-
     setInterval(createGlitter, 120);
   </script>
 
   <!-- Countdown Script -->
-<script>
-  function getTargetTime() {
-    const now = new Date();
-    const target = new Date(now);
+  <script>
+    function getTargetTime() {
+      const now = new Date();
+      const target = new Date(now);
 
-    const day = now.getDay(); // Sunday=0, Monday=1, ..., Thursday=4
-    let daysUntilThursday = (4 - day + 7) % 7;
+      const day = now.getDay(); // Sunday=0, Monday=1, ..., Thursday=4
+      let daysUntilThursday = (4 - day + 7) % 7;
 
-    // If it's Thursday and already past 8pm, go to next Thursday
-    if (daysUntilThursday === 0 && now.getHours() >= 20) {
-      daysUntilThursday = 7;
+      // If it's Thursday and already past 8pm, go to next Thursday
+      if (daysUntilThursday === 0 && now.getHours() >= 20) {
+        daysUntilThursday = 7;
+      }
+
+      target.setDate(now.getDate() + daysUntilThursday);
+      target.setHours(20, 0, 0, 0); // 8:00 PM
+
+      return target;
     }
 
-    target.setDate(now.getDate() + daysUntilThursday);
-    target.setHours(20, 0, 0, 0); // 8:00 PM
+    function updateCountdown() {
+      const now = new Date();
+      const target = getTargetTime();
+      const diff = target - now;
 
-    return target;
-  } // ← this closing brace was missing
+      if (diff <= 0) {
+        document.getElementById("countdown").textContent = "00:00:00";
+        return;
+      }
 
-  function updateCountdown() {
-    const now = new Date();
-    const target = getTargetTime();
-    const diff = target - now;
+      const totalSeconds = Math.floor(diff / 1000);
+      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+      const seconds = String(totalSeconds % 60).padStart(2, '0');
 
-    if (diff <= 0) {
-      // Immediately jump to the next Thursday
-      target.setDate(target.getDate() + 7);
+      document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
     }
 
-    const totalSeconds = Math.floor(diff / 1000);
-    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-    const seconds = String(totalSeconds % 60).padStart(2, '0');
-
-    document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    updateCountdown();
-    setInterval(updateCountdown, 1000);
-  });
-</script>
+    document.addEventListener("DOMContentLoaded", () => {
+      updateCountdown();
+      setInterval(updateCountdown, 1000);
+    });
+  </script>
 
 </body>
 </html>
