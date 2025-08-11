@@ -164,48 +164,48 @@
   </script>
 
   <!-- Countdown Script -->
-  <script>
-    function getTargetTime() {
-  const now = new Date();
-  const target = new Date(now);
+<script>
+  function getTargetTime() {
+    const now = new Date();
+    const target = new Date(now);
 
-  const day = now.getDay(); // Sunday=0, Monday=1, ..., Thursday=4
-  let daysUntilThursday = (4 - day + 7) % 7;
+    const day = now.getDay(); // Sunday=0, Monday=1, ..., Thursday=4
+    let daysUntilThursday = (4 - day + 7) % 7;
 
-  // If it's Thursday and already past 8pm, go to next Thursday
-  if (daysUntilThursday === 0 && now.getHours() >= 20) {
-    daysUntilThursday = 7;
-  }
-
-  target.setDate(now.getDate() + daysUntilThursday);
-  target.setHours(20, 0, 0, 0); // 8:00 PM
-
-  return target;
-
-    function updateCountdown() {
-      const now = new Date();
-      const target = getTargetTime();
-      const diff = target - now;
-
-      if (diff <= 0) {
-        document.getElementById("countdown").textContent = "00:00:00";
-        return;
-      }
-
-      const totalSeconds = Math.floor(diff / 1000);
-      const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
-      const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
-      const seconds = String(totalSeconds % 60).padStart(2, '0');
-
-      document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+    // If it's Thursday and already past 8pm, go to next Thursday
+    if (daysUntilThursday === 0 && now.getHours() >= 20) {
+      daysUntilThursday = 7;
     }
 
-    // Make sure DOM is ready
-    document.addEventListener("DOMContentLoaded", () => {
-      updateCountdown();
-      setInterval(updateCountdown, 1000);
-    });
-  </script>
+    target.setDate(now.getDate() + daysUntilThursday);
+    target.setHours(20, 0, 0, 0); // 8:00 PM
+
+    return target;
+  } // ← this closing brace was missing
+
+  function updateCountdown() {
+    const now = new Date();
+    const target = getTargetTime();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      // Immediately jump to the next Thursday
+      target.setDate(target.getDate() + 7);
+    }
+
+    const totalSeconds = Math.floor(diff / 1000);
+    const hours = String(Math.floor(totalSeconds / 3600)).padStart(2, '0');
+    const minutes = String(Math.floor((totalSeconds % 3600) / 60)).padStart(2, '0');
+    const seconds = String(totalSeconds % 60).padStart(2, '0');
+
+    document.getElementById("countdown").textContent = `${hours}:${minutes}:${seconds}`;
+  }
+
+  document.addEventListener("DOMContentLoaded", () => {
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  });
+</script>
 
 </body>
 </html>
