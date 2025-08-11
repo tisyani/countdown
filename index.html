@@ -165,18 +165,23 @@
 
   <!-- Countdown Script -->
   <script>
-
     function getTargetTime() {
-      const now = new Date();
-      const target = new Date();
-      target.setHours(20, 0, 0, 0); // today at 20:00
+  const now = new Date();
+  const target = new Date(now);
 
-      if (now >= target) {
-        target.setDate(target.getDate() + 1); // if past 8PM, go to tomorrow 8PM
-      }
+  const day = now.getDay(); // Sunday=0, Monday=1, ..., Thursday=4
+  let daysUntilThursday = (4 - day + 7) % 7;
 
-      return target;
-    }
+  // If it's Thursday and already past 8pm, go to next Thursday
+  if (daysUntilThursday === 0 && now.getHours() >= 20) {
+    daysUntilThursday = 7;
+  }
+
+  target.setDate(now.getDate() + daysUntilThursday);
+  target.setHours(20, 0, 0, 0); // 8:00 PM
+
+  return target;
+
     function updateCountdown() {
       const now = new Date();
       const target = getTargetTime();
