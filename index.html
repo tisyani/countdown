@@ -125,10 +125,50 @@
       100% { transform: translateY(-100vh) scale(0.3); opacity: 0; }
     }
 
+    /* New car button styles */
+    .car-button {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      width: 60px;
+      height: 60px;
+      background-color: #FFD700;
+      border-radius: 50%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 100;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      cursor: pointer;
+      transition: transform 0.3s;
+      text-decoration: none;
+    }
+
+    .car-button:hover {
+      transform: scale(1.1);
+    }
+
+    .car-button:active {
+      transform: scale(0.95);
+    }
+
+    .car-icon {
+      font-size: 30px;
+    }
+
     @media (max-width: 600px) {
       #countdown { font-size: 7vw; }
       .sticker { font-size: 4.5vw; }
       .img-floater { width: 22vw; }
+      .car-button {
+        width: 50px;
+        height: 50px;
+        bottom: 15px;
+        right: 15px;
+      }
+      .car-icon {
+        font-size: 25px;
+      }
     }
   </style>
 </head>
@@ -149,6 +189,11 @@
   <div class="sticker sticker1">✨✨✨✨✨✨✨✨<br>(random sparkles cause they shine like u)</div>
   <div class="sticker sticker2">💖💓💗</div>
   <div class="sticker sticker3">🌈 BOGY <3 YANY 🌈</div>
+
+  <!-- Car button -->
+  <a href="https://tisyani.github.io/sarga-kocs/" class="car-button" target="_blank" rel="noopener noreferrer">
+    <div class="car-icon">🚗</div>
+  </a>
 
   <!-- Sparkles -->
   <script>
